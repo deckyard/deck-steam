@@ -1,0 +1,34 @@
+# Grimoire book configuration for the @deckyard/steam documentation.
+
+[book]
+title = "@deckyard/steam"
+description = "A thick, friendly layer over Valve's Steam Web API for Jennifer."
+language = "en"
+src = "docs"
+
+[build]
+out = "site"
+clean = true
+jobs = 0
+
+[html]
+theme = "grimoire"
+mode = "auto"
+navPosition = "left"
+tocPosition = "right"
+tocDepth = 3
+sectionNumbers = true
+repoUrl = "https://github.com/deckyard/deck-steam"
+repoLabel = "Source"
+editUrl = "https://github.com/deckyard/deck-steam/edit/main/docs/{path}"
+footer = 'Part of <a href="https://github.com/deckyard">Deckyard</a>, community decks for <a href="https://jennifer-lang.dev/">Jennifer</a>. Rendered with <a href="https://grimoire.jennifer-lang.dev/">Grimoire</a>.'
+
+[highlight]
+enabled = true
+
+[search]
+enabled = true
+
+[pdf]
+# The book is published as a site only.
+enabled = false

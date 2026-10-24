@@ -1,0 +1,34 @@
+# The deck manifest, in the shape jvc specifies:
+# https://github.com/jennifer-language/jvc/blob/main/docs/manifest.md
+#
+# jvc looks for deck.toml, then deck.yaml, then deck.yml, then deck.json, and
+# the first present wins. The deck repositories deliberately use different ones
+# so that support is exercised; this one is deck.toml.
+#
+# Only `src/` is installed into a consumer's vendor tree, so `src/steam.j` is
+# the entry module named after the deck and the topic files it `include`s ride
+# along beneath it. `docs/` and `examples/` stay outside deliberately.
+
+[package]
+name = "@deckyard/steam"
+version = "0.1.0"
+description = "A thick, friendly layer over Valve's Steam Web API"
+license = "LGPL-3.0-only"
+authors = ["mplx <mplx@jennifer-lang.dev>"]
+# The deck talks to store.steampowered.com, steamcommunity.com and the Web API
+# over HTTPS. No `exec`: it shells out to nothing. No `sql`.
+capabilities = ["net"]
+keywords = ["steam", "valve", "games", "rest", "api"]
+
+[package.urls]
+deck = "https://raw.githubusercontent.com/deckyard/deck-steam/main/deck.toml"
+homepage = "https://github.com/deckyard/deck-steam"
+manual = "https://deckyard.github.io/deck-steam/"
+
+# Only the default binary: the deck opens sockets, which the constrained build
+# has no capability for.
+[engines]
+jennifer = ">=0.25.0"
+
+# No [decks] table: everything imported is a system library that ships with the
+# interpreter.
