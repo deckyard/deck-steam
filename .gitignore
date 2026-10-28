@@ -10,3 +10,4 @@ vendor/
 .ci-fixtures/
 # the leftover of a crashed `jennifer fmt -w`; tools/check-src.sh refuses it
 .jfmt-*.tmp
+.docblocks-*/
