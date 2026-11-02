@@ -436,15 +436,7 @@ func ensureSteamId(text as string) {
  * @internal
  */
 func isDigits(text as string) {
-    if (len($text) == 0) {
-        return false;
-    }
-    for (def ch in strings.chars($text)) {
-        if ($ch < "0" or $ch > "9") {
-            return false;
-        }
-    }
-    return true;
+    return regex.matches("^[0-9]+$", $text);
 }
 
 /**

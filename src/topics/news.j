@@ -212,6 +212,13 @@ export func plainText(markup as string) {
     def parts as list of string init [];
     def i as int init 0;
     while ($i < len($runes)) {
+        def ch as string init $runes[$i];
+        if ($ch != "<" and $ch != "[" and $ch != "\{") {
+            # Only these open markup; the rest is text, so skip the scanners.
+            $parts[] = $ch;
+            $i = $i + 1;
+            continue;
+        }
         def embed as int init clanImageEnd($runes, $i);
         if ($embed >= 0) {
             $parts[] = " ";
@@ -515,20 +522,7 @@ func clanImageEnd(runes as list of string, at as int) {
  * @internal
  */
 func collapseSpaces(text as string) {
-    def parts as list of string init [];
-    def blank as bool init true;
-    for (def ch in strings.chars($text)) {
-        if (isSpace($ch)) {
-            if (not $blank) {
-                $parts[] = " ";
-                $blank = true;
-            }
-        } else {
-            $parts[] = $ch;
-            $blank = false;
-        }
-    }
-    return strings.trim(strings.join($parts, ""));
+    return strings.trim(regex.replace("[ \t\n\r]+", $text, " "));
 }
 
 /**

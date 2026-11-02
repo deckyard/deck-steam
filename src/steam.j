@@ -35,6 +35,7 @@ use math;
 use json;
 use io;
 use os;
+use regex;
 
 import "rest.j" as rest;
 import "http.j" as http;
