@@ -13,12 +13,12 @@
  * with `include`, so this file is the module boundary.
  *
  * @module steam
- * @version 0.1.0
+ * @version 0.2.0-dev
  * @license LGPL-3.0-only
  * @see https://steamcommunity.com/dev
  * @see https://partner.steamgames.com/doc/webapi_overview
  * @example
- *   import "./steam.j" as steam;
+ *   import "@deckyard/steam/" as steam;
  *
  *   def c as steam.Client init steam.client("YOUR-KEY");
  *   def p as steam.PlayerSummary init steam.playerSummary($c, "76561197960287930");
