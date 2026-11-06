@@ -4,6 +4,8 @@ version = "0.2.0-dev"
 description = "A thick, friendly layer over Valve's Steam Web API"
 license = "LGPL-3.0-only"
 authors = ["mplx <mplx@jennifer-lang.dev>"]
+# The deck talks to store.steampowered.com, steamcommunity.com and the Web API
+# over HTTPS. No `exec`: it shells out to nothing. No `sql`.
 capabilities = ["net"]
 keywords = ["steam", "valve", "games", "rest", "api"]
 
