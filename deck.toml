@@ -15,4 +15,4 @@ homepage = "https://github.com/deckyard/deck-steam"
 manual = "https://deckyard.github.io/deck-steam/"
 
 [engines]
-jennifer = ">=0.25.0"
+jennifer = ">=0.26.0"
