@@ -149,6 +149,39 @@ func notFoundStatus() {
     ensureOk(404, "https://example.invalid");
 }
 
+# A refusal is a SteamError carrying the status; a local check carries 0.
+func testARefusalIsASteamError() {
+    try {
+        ensureOk(429, "https://example.invalid");
+        throw Error{kind: "missed", message: "ensureOk did not throw"};
+    } catch (e) {
+        testing.assertEqual($e.kind, "steam");
+        testing.assertEqual($e.status, 429);
+        testing.assertEqual(
+            $e.message,
+            "https://example.invalid answered HTTP 429: the key is being rate limited");
+    }
+    try {
+        rethrown("GET https://example.invalid", "rest", "x: HTTP 403: no", 403);
+        throw Error{kind: "missed", message: "rethrown did not throw"};
+    } catch (e) {
+        testing.assertEqual($e.status, 403);
+        testing.assertEqual($e.message, "GET https://example.invalid failed: x: HTTP 403: no");
+    }
+    try {
+        rethrown("GET https://example.invalid", "limit", "too big", 0);
+        throw Error{kind: "missed", message: "rethrown did not throw"};
+    } catch (e) {
+        testing.assertEqual($e.kind, "limit");
+    }
+    try {
+        raiseError("local");
+        throw Error{kind: "missed", message: "raiseError did not throw"};
+    } catch (e) {
+        testing.assertEqual($e.status, 0);
+    }
+}
+
 func testDecodeBodyRejectsHtml() {
     testing.assertEqual(nodeInt(decodeBody('{"n": 3}', "u"), "/n"), 3);
     testing.assertThrows("decodeHtml", "steam");

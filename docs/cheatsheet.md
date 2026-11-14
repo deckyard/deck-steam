@@ -8,7 +8,9 @@ import "@deckyard/steam/" as steam;
 def c as steam.Client init steam.client("YOUR-KEY");   # "" for the keyless endpoints
 ```
 
-Every failure is `Error{kind: "steam"}`. Each call that takes a `Client`
+Every failure is a `SteamError` (kind `"steam"`, with the HTTP `status` of a
+refusal), except a reply body past the transport's cap: `Error{kind: "limit"}`.
+Each call that takes a `Client`
 also throws on a transport failure or a non-JSON reply; the Notes column
 lists the other conditions. Arguments are checked before any request.
 
@@ -77,6 +79,16 @@ steam> POST https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDet
 | `CURRENCY_JPY` | `8` | Japanese yen |
 | `CURRENCY_CAD` | `20` | Canadian dollar |
 | `CURRENCY_AUD` | `21` | Australian dollar |
+
+### `SteamError`
+
+Every error of kind `"steam"`.
+
+| Field | Meaning |
+|---|---|
+| `kind as string` | always `"steam"` |
+| `message as string` | what went wrong; a refusal names the URL and `HTTP <status>` |
+| `status as int` | the HTTP status Steam answered (401, 403, 429, ...); 0 when the failure is not a refused request |
 
 ### `Client`
 

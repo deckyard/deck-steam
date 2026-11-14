@@ -10,7 +10,8 @@ A typed client for Valve's Steam Web API (`ISteamUser`, `IPlayerService`,
 `store.steampowered.com` and the Community Market on `steamcommunity.com`,
 for [Jennifer](https://jennifer-lang.dev/). Replies come back as structs,
 Steam ids are accepted in all three notations, arguments are checked before
-any request, and every failure is `Error{kind: "steam"}`.
+any request, and every failure is a `SteamError` (kind `"steam"`, with the
+HTTP `status`).
 
 ## Install
 

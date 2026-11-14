@@ -351,14 +351,57 @@ export func call(
 }
 
 /**
+ * A failed Steam call. Every error of kind `"steam"` is one, so its fields
+ * are safe to read once the kind matches.
+ *
+ * @field kind {string} always `"steam"`
+ * @field message {string} what went wrong; a refusal names the URL and `HTTP <status>`
+ * @field status {int} the HTTP status Steam answered (401, 403, 429, ...); 0 when the failure is not a refused request
+ */
+export def struct SteamError {
+    kind as string,
+    message as string,
+    status as int
+};
+
+/**
  * Throw the deck's error.
  *
  * @param message {string} human-readable failure description
- * @throws {Error} always, kind "steam"
+ * @throws {SteamError} always, kind "steam", status 0
  * @internal
  */
 func raiseError(message as string) {
-    throw Error{kind: "steam", message: $message, file: "", line: 0, col: 0};
+    throw SteamError{kind: "steam", message: $message, status: 0};
+}
+
+/**
+ * Throw the deck's error for a refused request.
+ *
+ * @param message {string} human-readable failure description
+ * @param status {int} the HTTP status
+ * @throws {SteamError} always, kind "steam"
+ * @internal
+ */
+func raiseStatus(message as string, status as int) {
+    throw SteamError{kind: "steam", message: $message, status: $status};
+}
+
+/**
+ * Rethrow a transport error as the deck's own: a `rest` refusal keeps its
+ * status, a reached cap stays kind "limit".
+ *
+ * @param what {string} the request, for the message
+ * @param kind {string} the caught error's kind
+ * @param message {string} the caught error's message
+ * @param status {int} the HTTP status of a `rest.HttpError`, else 0
+ * @internal
+ */
+func rethrown(what as string, kind as string, message as string, status as int) {
+    if ($kind == "limit") {
+        throw Error{kind: "limit", message: $what + " failed: " + $message};
+    }
+    raiseStatus($what + " failed: " + $message, $status);
 }
 
 /**
@@ -583,7 +626,11 @@ func getJson(r as rest.Client, path as string, params as map of string to string
     try {
         return rest.getJson($r, $path, $params);
     } catch (e) {
-        raiseError("GET " + $url + " failed: " + $e.message);
+        def status as int init 0;
+        if ($e.kind == "rest") {
+            $status = $e.status;
+        }
+        rethrown("GET " + $url, $e.kind, $e.message, $status);
     }
 }
 
@@ -602,7 +649,11 @@ func postForm(r as rest.Client, path as string, body as string, url as string) {
     try {
         return rest.post($r, $path, "application/x-www-form-urlencoded", $body);
     } catch (e) {
-        raiseError("POST " + $url + " failed: " + $e.message);
+        def status as int init 0;
+        if ($e.kind == "rest") {
+            $status = $e.status;
+        }
+        rethrown("POST " + $url, $e.kind, $e.message, $status);
     }
 }
 
@@ -618,8 +669,10 @@ func ensureOk(status as int, url as string) {
     if ($status >= 200 and $status < 300) {
         return;
     }
-    raiseError($url + " answered HTTP " + convert.toString($status) + ": " +
-        statusHint($status));
+    raiseStatus(
+        $url + " answered HTTP " + convert.toString($status) + ": " +
+            statusHint($status),
+        $status);
 }
 
 /**

@@ -72,8 +72,10 @@ steam> GET https://store.steampowered.com/api/appdetails?appids=620&cc=DE&l=germ
 
 ## Errors
 
-Every failure is `Error{kind: "steam"}`. Arguments are checked before
-anything is sent:
+Every failure is a `steam.SteamError` (kind `"steam"`), except a reply body
+past the transport's cap, which is `Error{kind: "limit"}`. Its `status` field
+holds the HTTP status of a refused request (429 when the key is rate limited),
+0 otherwise. Arguments are checked before anything is sent:
 
 ```jennifer
 try {
