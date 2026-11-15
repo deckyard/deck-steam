@@ -114,7 +114,7 @@ export def struct Collection {
  * @return {list of PublishedFile} one entry per item Steam knew; unknown
  *         ids are left out
  * @throws {Error} kind "steam" on an empty or oversized batch, on an id
- *                 that is not a number, or on a transport failure
+ *                 that is not a number, or on a broken reply
  * @example
  *   def items as list of steam.PublishedFile init
  *       steam.publishedFileDetails($c, ["450814997"]);
@@ -161,7 +161,7 @@ export func publishedFile(c as Client, publishedFileId as string) {
  * @param collectionIds {list of string} up to 100 collection ids
  * @return {list of Collection} one entry per id asked, in the same order
  * @throws {Error} kind "steam" on an empty or oversized batch, on an id
- *                 that is not a number, or on a transport failure
+ *                 that is not a number, or on a broken reply
  */
 export func collectionDetails(c as Client, collectionIds as list of string) {
     def form as map of string to string init fileIdForm($collectionIds, "collectioncount");

@@ -336,8 +336,8 @@ export func hasKey(c as Client) {
  * @param params {map of string to string} query parameters, {} for none
  * @return {json.Value} the decoded response body
  * @throws {Error} kind "steam" when a name is not letters and digits, the
- *                 version is not positive, on a non-2xx status, a transport
- *                 failure, or a non-JSON reply
+ *                 version is not positive, on a non-2xx status, a broken reply,
+ *                 or a non-JSON reply
  * @example
  *   def v as json.Value init steam.call($c, "ISteamApps", "GetAppList", 2, {});
  */
@@ -389,7 +389,9 @@ func raiseStatus(message as string, status as int) {
 
 /**
  * Rethrow a transport error as the deck's own: a `rest` refusal keeps its
- * status, a reached cap stays kind "limit".
+ * status, a reached cap stays kind "limit" with the request in front of its
+ * message. The other generic kinds (`isGeneric`) never get here: the request
+ * helpers pass them on unchanged.
  *
  * @param what {string} the request, for the message
  * @param kind {string} the caught error's kind
@@ -402,6 +404,19 @@ func rethrown(what as string, kind as string, message as string, status as int) 
         throw Error{kind: "limit", message: $what + " failed: " + $message};
     }
     raiseStatus($what + " failed: " + $message, $status);
+}
+
+/**
+ * Whether an error kind is one every library shares, which the deck passes
+ * on instead of rewrapping.
+ *
+ * @param kind {string} the caught error's kind
+ * @return {bool} true for "limit", "timeout", "closed", "net", "cancelled"
+ * @internal
+ */
+func isGeneric(kind as string) {
+    return $kind == "limit" or $kind == "timeout" or $kind == "closed" or $kind == "net" or
+        $kind == "cancelled";
 }
 
 /**
@@ -533,7 +548,7 @@ func logRequest(c as Client, verb as string, url as string, params as map of str
  * @param version {int} the method version
  * @param params {map of string to string} query parameters
  * @return {json.Value} the decoded body
- * @throws {Error} kind "steam" on a transport failure or a non-JSON reply
+ * @throws {Error} kind "steam" on a broken or non-JSON reply
  * @internal
  */
 func apiGet(
@@ -585,7 +600,7 @@ func apiPost(
  * @param path {string} a path under `store.steampowered.com`
  * @param params {map of string to string} query parameters
  * @return {json.Value} the decoded body
- * @throws {Error} kind "steam" on a transport failure or a non-JSON reply
+ * @throws {Error} kind "steam" on a broken or non-JSON reply
  * @internal
  */
 func storeGet(c as Client, path as string, params as map of string to string) {
@@ -602,7 +617,7 @@ func storeGet(c as Client, path as string, params as map of string to string) {
  * @param path {string} a path under `steamcommunity.com`
  * @param params {map of string to string} query parameters
  * @return {json.Value} the decoded body
- * @throws {Error} kind "steam" on a transport failure or a non-JSON reply
+ * @throws {Error} kind "steam" on a broken or non-JSON reply
  * @internal
  */
 func communityGet(c as Client, path as string, params as map of string to string) {
@@ -612,7 +627,9 @@ func communityGet(c as Client, path as string, params as map of string to string
 }
 
 /**
- * Run a GET, translating any transport error into the deck's own.
+ * Run a GET, translating any transport error into the deck's own, except the
+ * generic kinds: "net", "timeout", "closed" and "cancelled" go on unchanged,
+ * "limit" keeps its kind.
  *
  * @param r {rest.Client} the configured REST client
  * @param path {string} the request path
@@ -626,6 +643,11 @@ func getJson(r as rest.Client, path as string, params as map of string to string
     try {
         return rest.getJson($r, $path, $params);
     } catch (e) {
+        # a transport failure, a deadline, a closed connection or a
+        # cancellation goes on as it is; a cap keeps its kind in rethrown
+        if (isGeneric($e.kind) and $e.kind != "limit") {
+            throw $e;
+        }
         def status as int init 0;
         if ($e.kind == "rest") {
             $status = $e.status;
@@ -635,7 +657,9 @@ func getJson(r as rest.Client, path as string, params as map of string to string
 }
 
 /**
- * Run a form POST, translating any transport error into the deck's own.
+ * Run a form POST, translating any transport error into the deck's own,
+ * except the generic kinds: "net", "timeout", "closed" and "cancelled" go on
+ * unchanged, "limit" keeps its kind.
  *
  * @param r {rest.Client} the configured REST client
  * @param path {string} the request path
@@ -649,6 +673,11 @@ func postForm(r as rest.Client, path as string, body as string, url as string) {
     try {
         return rest.post($r, $path, "application/x-www-form-urlencoded", $body);
     } catch (e) {
+        # a transport failure, a deadline, a closed connection or a
+        # cancellation goes on as it is; a cap keeps its kind in rethrown
+        if (isGeneric($e.kind) and $e.kind != "limit") {
+            throw $e;
+        }
         def status as int init 0;
         if ($e.kind == "rest") {
             $status = $e.status;
@@ -700,13 +729,18 @@ func statusHint(status as int) {
  * @param body {string} the raw response body
  * @param url {string} the URL that produced it
  * @return {json.Value} the decoded document
- * @throws {Error} kind "steam" when the body is not JSON
+ * @throws {Error} kind "steam" when the body is not JSON, kind "limit" past
+ *   the decoder's nesting or node cap
  * @internal
  */
 func decodeBody(body as string, url as string) {
     try {
         return json.decode($body);
     } catch (e) {
+        # the decoder's nesting and node caps are reached caps
+        if (isGeneric($e.kind)) {
+            throw $e;
+        }
         raiseError($url + " did not answer JSON: " + $e.message);
     }
 }

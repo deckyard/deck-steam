@@ -122,7 +122,7 @@ export def struct GameSchema {
  * @return {PlayerAchievements} the record, localized to the client's language
  * @throws {Error} kind "steam" without a key, on an unparseable id or a bad
  *                 app id, when Steam refuses (private profile, unowned game,
- *                 no stats), or on a transport failure
+ *                 no stats), or on a broken reply
  * @example
  *   def a as steam.PlayerAchievements init
  *       steam.playerAchievements($c, "76561197960287930", 440);
@@ -169,7 +169,7 @@ export func playerAchievements(c as Client, steamId as string, appId as int) {
  * @param appId {int} the game
  * @return {list of StatValue} the statistics, empty when the game keeps none
  * @throws {Error} kind "steam" without a key, on a bad app id, or on a
- *                 transport failure
+ *                 broken reply
  */
 export func userStats(c as Client, steamId as string, appId as int) {
     requireKey($c, "reading game statistics");
@@ -192,7 +192,7 @@ export func userStats(c as Client, steamId as string, appId as int) {
  * @param c {Client} an API client, with or without a key
  * @param appId {int} the game
  * @return {list of AchievementRarity} the achievements, rarest last
- * @throws {Error} kind "steam" on a bad app id or a transport failure
+ * @throws {Error} kind "steam" on a bad app id or a broken reply
  */
 export func globalAchievementRarity(c as Client, appId as int) {
     def params as map of string to string init {"gameid": convert.toString(ensureAppId($appId))};
@@ -220,7 +220,7 @@ export func globalAchievementRarity(c as Client, appId as int) {
  * @param appId {int} the game
  * @return {int} the current player count
  * @throws {Error} kind "steam" on a bad app id, when Steam has no count
- *                 for the app, or on a transport failure
+ *                 for the app, or on a broken reply
  * @example
  *   io.printf("%d in game\n", steam.currentPlayers($c, 730));
  */
@@ -245,7 +245,7 @@ export func currentPlayers(c as Client, appId as int) {
  * @param appId {int} the game
  * @return {GameSchema} the definitions, localized to the client's language
  * @throws {Error} kind "steam" without a key, on a bad app id, or on a
- *                 transport failure
+ *                 broken reply
  */
 export func gameSchema(c as Client, appId as int) {
     requireKey($c, "reading a game schema");

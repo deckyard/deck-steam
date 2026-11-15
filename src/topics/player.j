@@ -100,7 +100,7 @@ export def struct BadgeQuest {
  * @param includeFreeGames {bool} also count played free-to-play titles
  * @return {list of OwnedGame} the library, in Steam's own order
  * @throws {Error} kind "steam" without a key, on an unparseable id, or on
- *                 a transport failure
+ *                 a broken reply
  * @example
  *   def lib as list of steam.OwnedGame init
  *       steam.ownedGames($c, "76561197960287930", true, true);
@@ -148,7 +148,7 @@ export func ownedGameCount(c as Client, steamId as string) {
  * @param count {int} how many titles to return at most
  * @return {list of OwnedGame} the recent titles, most recently played first
  * @throws {Error} kind "steam" without a key, on an unparseable id, on a
- *                 non-positive count, or on a transport failure
+ *                 non-positive count, or on a broken reply
  */
 export func recentlyPlayedGames(c as Client, steamId as string, count as int) {
     requireKey($c, "reading recent playtime");
@@ -167,7 +167,7 @@ export func recentlyPlayedGames(c as Client, steamId as string, count as int) {
  * @param steamId {string} a Steam id in any notation
  * @return {int} the level, 0 when the profile hides it
  * @throws {Error} kind "steam" without a key, on an unparseable id, or on
- *                 a transport failure
+ *                 a broken reply
  */
 export func steamLevel(c as Client, steamId as string) {
     requireKey($c, "reading a Steam level");
@@ -183,7 +183,7 @@ export func steamLevel(c as Client, steamId as string) {
  * @param steamId {string} a Steam id in any notation
  * @return {BadgeCollection} the badges and the level they add up to
  * @throws {Error} kind "steam" without a key, on an unparseable id, or on
- *                 a transport failure
+ *                 a broken reply
  */
 export func badges(c as Client, steamId as string) {
     requireKey($c, "reading badges");
@@ -200,7 +200,7 @@ export func badges(c as Client, steamId as string) {
  * @param badgeId {int} the badge to inspect
  * @return {list of BadgeQuest} one entry per task
  * @throws {Error} kind "steam" without a key, on a non-positive badge id,
- *                 or on a transport failure
+ *                 or on a broken reply
  */
 export func badgeProgress(c as Client, steamId as string, badgeId as int) {
     requireKey($c, "reading badge progress");
@@ -237,7 +237,7 @@ export func badgeProgress(c as Client, steamId as string, badgeId as int) {
  * @param appId {int} the game being played
  * @return {string} the lender's 64-bit id, or "" when the copy is owned
  * @throws {Error} kind "steam" without a key, on a bad app id, or on a
- *                 transport failure
+ *                 broken reply
  */
 export func sharedGameLender(c as Client, steamId as string, appId as int) {
     requireKey($c, "checking Family Sharing");

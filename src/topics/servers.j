@@ -59,7 +59,7 @@ export def struct LoginTokenStatus {
  *
  * @param c {Client} an API client with a key
  * @return {list of GameServerAccount} the registered accounts
- * @throws {Error} kind "steam" without a key or on a transport failure
+ * @throws {Error} kind "steam" without a key or on a broken reply
  * @example
  *   for (def s in steam.gameServerAccounts($c)) {
  *       io.printf("%s app %d  %s\n", $s.steamId, $s.appId, $s.memo);
@@ -91,7 +91,7 @@ export func gameServerAccounts(c as Client) {
  * @param steamId {string} the server's Steam id, in any notation
  * @return {GameServerInfo} what Steam publishes about it
  * @throws {Error} kind "steam" without a key, on an unparseable id, or on
- *                 a transport failure
+ *                 a broken reply
  */
 export func gameServerInfo(c as Client, steamId as string) {
     requireKey($c, "reading a game server account");
@@ -116,7 +116,7 @@ export func gameServerInfo(c as Client, steamId as string) {
  * @param loginToken {string} the token to check
  * @return {LoginTokenStatus} what Steam thinks of it
  * @throws {Error} kind "steam" without a key, on a blank token, or on a
- *                 transport failure
+ *                 broken reply
  */
 export func queryLoginToken(c as Client, loginToken as string) {
     requireKey($c, "checking a login token");

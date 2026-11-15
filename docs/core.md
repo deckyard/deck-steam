@@ -72,8 +72,15 @@ steam> GET https://store.steampowered.com/api/appdetails?appids=620&cc=DE&l=germ
 
 ## Errors
 
-Every failure is a `steam.SteamError` (kind `"steam"`), except a reply body
-past the transport's cap, which is `Error{kind: "limit"}`. Its `status` field
+Every failure is a `steam.SteamError` (kind `"steam"`), except the generic
+kinds: a reply body past the transport's cap or a JSON reply past the
+decoder's nesting cap is `Error{kind: "limit"}`, a reply that does not come
+within the timeout is kind `"timeout"`, a connection closed mid-reply kind
+`"closed"`, a cancelled task kind `"cancelled"`, and a host that
+cannot be reached (refused, reset, unreachable, no DNS answer, a failed TLS
+handshake, closed before any reply), which is the transport's `net.NetError`
+(kind `"net"`) passed on unchanged: its `reason`, `op`, `sent` and `replied`
+fields say what happened, and it names only the host and port. Its `status` field
 holds the HTTP status of a refused request (429 when the key is rate limited),
 0 otherwise. Arguments are checked before anything is sent:
 
@@ -85,8 +92,8 @@ try {
 }
 ```
 
-A transport failure names the method and the URL without its query string,
-so the message never carries the key. A non-2xx reply to a GET carries the
+Any other transport failure (a malformed reply) names the method and the URL
+without its query string, so the message never carries the key. A non-2xx reply to a GET carries the
 status and body from `rest`; the two POST lookups translate the status
 instead: 401 "the API key is missing or not valid", 403 "the key is valid
 but not allowed to read this profile", 429 "the key is being rate limited".

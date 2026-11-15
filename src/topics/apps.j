@@ -112,7 +112,7 @@ export def struct ApiMethod {
  * @param maxResults {int} how many entries to ask for, 1 to 50000
  * @return {AppListPage} the page and where to resume
  * @throws {Error} kind "steam" without a key, on a negative `lastAppId`, on
- *                 a page size outside 1-50000, or on a transport failure
+ *                 a page size outside 1-50000, or on a broken reply
  */
 export func appListPage(c as Client, lastAppId as int, maxResults as int) {
     requireKey($c, "reading the app catalogue");
@@ -147,7 +147,7 @@ export func appListPage(c as Client, lastAppId as int, maxResults as int) {
  * @param maxPages {int} stop after this many pages, however much is left
  * @return {list of App} the catalogue, ascending by app id
  * @throws {Error} kind "steam" without a key, on a non-positive page
- *                 budget, or on a transport failure
+ *                 budget, or on a broken reply
  * @example
  *   def catalogue as list of steam.App init steam.appList($c, 20);
  *   for (def a in steam.findApps($catalogue, "portal")) {
@@ -216,7 +216,7 @@ export func appById(apps as list of App, appId as int) {
  * @param version {int} the client version to check
  * @return {VersionCheck} Steam's verdict
  * @throws {Error} kind "steam" on a bad app id, a negative version, or a
- *                 transport failure
+ *                 broken reply
  */
 export func upToDateCheck(c as Client, appId as int, version as int) {
     if ($version < 0) {
@@ -242,7 +242,7 @@ export func upToDateCheck(c as Client, appId as int, version as int) {
  * @param c {Client} an API client, with or without a key
  * @param address {string} an IP address, optionally with `:port`
  * @return {list of GameServer} the servers Steam knows there
- * @throws {Error} kind "steam" on a blank address or a transport failure
+ * @throws {Error} kind "steam" on a blank address or a broken reply
  */
 export func serversAtAddress(c as Client, address as string) {
     def params as map of string to string init {"addr": ensureText($address, "server address")};
@@ -259,7 +259,7 @@ export func serversAtAddress(c as Client, address as string) {
  *
  * @param c {Client} an API client, with or without a key
  * @return {ServerInfo} Steam's current time
- * @throws {Error} kind "steam" on a transport failure
+ * @throws {Error} kind "steam" on a broken reply
  */
 export func serverInfo(c as Client) {
     def body as json.Value init apiGet($c, "ISteamWebAPIUtil", "GetServerInfo", 1, {});
@@ -275,7 +275,7 @@ export func serverInfo(c as Client) {
  *
  * @param c {Client} an API client, with or without a key
  * @return {list of ApiMethod} every method, flattened across interfaces
- * @throws {Error} kind "steam" on a transport failure
+ * @throws {Error} kind "steam" on a broken reply
  */
 export func supportedApiList(c as Client) {
     def body as json.Value init apiGet($c, "ISteamWebAPIUtil", "GetSupportedAPIList", 1, {});

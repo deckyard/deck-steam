@@ -385,3 +385,123 @@ func testClientFromEnv() {
     testing.assertEqual($bare.language, "english");
     testing.assertEqual($bare.countryCode, "US");
 }
+
+/**
+ * A loopback base URL nothing listens on.
+ *
+ * @return {string} `http://127.0.0.1:port` of a listener already closed
+ */
+func closedBase() {
+    def l as net.Listener init net.listen("127.0.0.1:0");
+    def address as string init net.address($l);
+    net.close($l);
+    return "http://" + $address;
+}
+
+# A host that cannot be reached is the transport's net.NetError, passed on
+# with its fields, for a GET and a form POST alike, and without the key.
+func testTransportFailuresPassOn() {
+    def base as string init closedBase();
+    def r as rest.Client init httpClient($base, client("K3Y-SECRET"));
+    try {
+        getJson($r, "/ISteamUser/GetPlayerSummaries/v2/", {"key": "K3Y-SECRET"}, $base);
+        throw Error{kind: "missed", message: "a refused GET passed"};
+    } catch (e) {
+        testing.assertEqual($e.kind, "net");
+        def n as net.NetError init $e;
+        testing.assertEqual($n.reason, "refused");
+        testing.assertEqual($n.op, "connect");
+        testing.assertFalse($n.sent);
+        testing.assertFalse($n.replied);
+        testing.assertFalse(strings.contains($n.message, "K3Y-SECRET"));
+    }
+    try {
+        postForm($r, "/ISteamRemoteStorage/GetPublishedFileDetails/v1/", "key=K3Y-SECRET", $base);
+        throw Error{kind: "missed", message: "a refused POST passed"};
+    } catch (e) {
+        testing.assertEqual($e.kind, "net");
+        def n as net.NetError init $e;
+        testing.assertEqual($n.reason, "refused");
+        testing.assertFalse(strings.contains($n.message, "K3Y-SECRET"));
+    }
+}
+
+/**
+ * Serve a loopback listener with one canned answer per connection (or none,
+ * to let the client wait), until the listener is closed.
+ *
+ * @param l {net.Listener} the listener
+ * @param answer {string} what to write after reading the request; "" to
+ *   write nothing and keep the connection open
+ * @return {task of int} the server task; it returns the connections served
+ */
+func serveCanned(l as net.Listener, answer as string) {
+    return spawn {
+        def served as int init 0;
+        def open as list of net.Conn init [];
+        while (true) {
+            def conn as net.Conn;
+            try {
+                $conn = net.accept($l);
+            } catch (e) {
+                for (def held in $open) {
+                    net.close($held);
+                }
+                return $served;
+            }
+            $served = $served + 1;
+            net.readBytes($conn, 65536);
+            if ($answer == "") {
+                $open[] = $conn;
+            } else {
+                net.writeBytes($conn, convert.bytesFromString("utf-8", $answer));
+                net.close($conn);
+            }
+        }
+        return $served;
+    };
+}
+
+# A deadline keeps its generic kind.
+func testTimeoutPassesOn() {
+    def l as net.Listener init net.listen("127.0.0.1:0");
+    def t as task of int init serveCanned($l, "");
+    def c as Client init withRetries(withTimeout(client(""), 300), 0);
+    try {
+        getJson(httpClient("http://" + net.address($l), $c), "/x", {}, "http://x");
+        throw Error{kind: "missed", message: "a silent server passed"};
+    } catch (e) {
+        testing.assertEqual($e.kind, "timeout");
+    }
+    net.close($l);
+    task.wait($t);
+}
+
+# A connection closed mid-reply keeps its generic kind.
+func testClosedPassesOn() {
+    def c as Client init withRetries(withTimeout(client(""), 300), 0);
+    def m as net.Listener init net.listen("127.0.0.1:0");
+    def u as task of int init serveCanned(
+        $m,
+        "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 500\r\n\r\n\{");
+    try {
+        getJson(httpClient("http://" + net.address($m), $c), "/x", {}, "http://x");
+        throw Error{kind: "missed", message: "a cut reply passed"};
+    } catch (e) {
+        testing.assertEqual($e.kind, "closed");
+    }
+    net.close($m);
+    task.wait($u);
+}
+
+# A JSON reply past the decoder's nesting cap is a reached cap.
+func testDecodeBodyPassesTheCapOn() {
+    try {
+        decodeBody(
+            strings.repeat("[", 1001) + strings.repeat("]", 1001),
+            "https://example.invalid");
+        throw Error{kind: "missed", message: "a deep reply passed"};
+    } catch (e) {
+        testing.assertEqual($e.kind, "limit");
+    }
+}

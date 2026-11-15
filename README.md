@@ -11,7 +11,10 @@ A typed client for Valve's Steam Web API (`ISteamUser`, `IPlayerService`,
 for [Jennifer](https://jennifer-lang.dev/). Replies come back as structs,
 Steam ids are accepted in all three notations, arguments are checked before
 any request, and every failure is a `SteamError` (kind `"steam"`, with the
-HTTP `status`).
+HTTP `status`), except the generic kinds: a reached cap (`"limit"`), a
+deadline (`"timeout"`), a connection closed mid-reply (`"closed"`), a
+cancelled task (`"cancelled"`) and a host that cannot be reached
+(`net.NetError`, kind `"net"`).
 
 ## Install
 

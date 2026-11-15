@@ -221,7 +221,7 @@ def struct StoreRecord {
  * @return {AppDetails} the record
  * @throws {Error} kind "steam" on a bad app id, when the storefront has no
  *                 record (a delisted or region-locked title), or on a
- *                 transport failure
+ *                 broken reply
  * @example
  *   def d as steam.AppDetails init steam.appDetails($c, 620);
  *   io.printf("%s - %s\n", $d.name, $d.price.finalFormatted);
@@ -246,7 +246,7 @@ export func appDetails(c as Client, appId as int) {
  * @return {list of AppDetails} one record per app the storefront knew, in
  *         the order asked; apps it has no record of are left out
  * @throws {Error} kind "steam" on a non-positive app id - checked for every
- *                 id before the first request - or on a transport failure
+ *                 id before the first request - or on a broken reply
  */
 export func appDetailsMany(c as Client, appIds as list of int) {
     for (def id in $appIds) {
@@ -274,7 +274,7 @@ export func appDetailsMany(c as Client, appIds as list of int) {
  * @param appIds {list of int} the application ids
  * @return {list of AppPrice} one entry per id asked, in the same order
  * @throws {Error} kind "steam" on an empty list, a non-positive app id, or a
- *                 transport failure
+ *                 broken reply
  * @example
  *   for (def p in steam.appPrices($c, [620, 440])) {
  *       io.printf("%d %s\n", $p.appId, $p.price.finalFormatted);
@@ -301,7 +301,7 @@ export func appPrices(c as Client, appIds as list of int) {
  * @param packageId {int} the package id
  * @return {PackageDetails} the record
  * @throws {Error} kind "steam" on a non-positive id, when the storefront
- *                 has no record, or on a transport failure
+ *                 has no record, or on a broken reply
  */
 export func packageDetails(c as Client, packageId as int) {
     if ($packageId <= 0) {
@@ -324,7 +324,7 @@ export func packageDetails(c as Client, packageId as int) {
  *
  * @param c {Client} an API client, with or without a key
  * @return {FeaturedLists} the front page's four lists
- * @throws {Error} kind "steam" on a transport failure
+ * @throws {Error} kind "steam" on a broken reply
  */
 export func featured(c as Client) {
     def body as json.Value init storeGet(
@@ -394,7 +394,7 @@ export func discountLabel(price as Price) {
  * @param c {Client} an API client
  * @param appId {int} the application id, already validated
  * @return {StoreRecord} the record, or `found` false when there is none
- * @throws {Error} kind "steam" on a transport failure or a non-JSON reply
+ * @throws {Error} kind "steam" on a broken or non-JSON reply
  * @internal
  */
 func fetchAppRecord(c as Client, appId as int) {

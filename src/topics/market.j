@@ -52,7 +52,7 @@ export def struct MarketPrice {
  * @return {MarketPrice} the quote, with `found` false when the market has
  *         no price for the item
  * @throws {Error} kind "steam" on a bad app id, a blank name, or a
- *                 transport failure
+ *                 broken reply
  * @example
  *   def c as steam.Client init steam.withCurrency(steam.client(""), steam.CURRENCY_EUR);
  *   def q as steam.MarketPrice init

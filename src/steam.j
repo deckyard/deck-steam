@@ -9,7 +9,10 @@
  *
  * Replies fold into structs; a Steam id is accepted in any of its three
  * notations; arguments are checked before any request; every failure is
- * `Error{kind: "steam"}`. The topic files under `topics/` are spliced in
+ * `Error{kind: "steam"}`, except the generic kinds: a reached cap ("limit"),
+ * a deadline ("timeout"), a connection closed mid-reply ("closed"), a
+ * cancelled task ("cancelled") and a host that cannot be reached (the
+ * transport's `net.NetError`, kind "net"), all passed on. The topic files under `topics/` are spliced in
  * with `include`, so this file is the module boundary.
  *
  * @module steam

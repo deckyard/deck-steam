@@ -9,6 +9,8 @@
 # argument check that fails before the request (a keyless client, a bad
 # id); the reply folders are tested against inline JSON fixtures.
 
+use net;
+use task;
 use testing;
 use maps;
 use strings;

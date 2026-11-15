@@ -138,7 +138,7 @@ export def struct NewsItem {
  *        the whole body
  * @return {list of NewsItem} the items, newest first
  * @throws {Error} kind "steam" on a bad app id, a non-positive count, a
- *                 negative length, or a transport failure
+ *                 negative length, or a broken reply
  * @example
  *   for (def n in steam.newsForApp($c, 440, 5, 300)) {
  *       io.printf("%s\n  %s\n", $n.title, steam.plainText($n.contents));
@@ -160,7 +160,7 @@ export func newsForApp(c as Client, appId as int, count as int, maxLength as int
  * @param feeds {string} comma-separated feed names, "" for every feed
  * @return {list of NewsItem} the items, newest first
  * @throws {Error} kind "steam" on a bad app id, a non-positive count, a
- *                 negative length, or a transport failure
+ *                 negative length, or a broken reply
  * @example
  *   steam.newsForAppFeeds($c, 440, 5, 0, steam.FEED_ANNOUNCEMENTS);
  */

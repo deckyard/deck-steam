@@ -9,7 +9,10 @@ def c as steam.Client init steam.client("YOUR-KEY");   # "" for the keyless endp
 ```
 
 Every failure is a `SteamError` (kind `"steam"`, with the HTTP `status` of a
-refusal), except a reply body past the transport's cap: `Error{kind: "limit"}`.
+refusal), except the generic kinds: a reached cap `Error{kind: "limit"}`, a
+deadline `"timeout"`, a connection closed mid-reply `"closed"`, a cancelled
+task `"cancelled"`, and a host that cannot be reached `net.NetError` (kind
+`"net"`).
 Each call that takes a `Client`
 also throws on a transport failure or a non-JSON reply; the Notes column
 lists the other conditions. Arguments are checked before any request.
@@ -832,7 +835,8 @@ Messages name the fix or the cause:
 
 - validation: `the app id must be positive, got 0`
 - transport: `GET https://store.steampowered.com/api/appdetails failed: ...`
-  (the URL never carries the query string, so never the key)
+  (the URL never carries the query string, so never the key); a host that
+  cannot be reached is a `net.NetError` naming only host and port
 - refusal: `the storefront has no record of app 1 in country US - it may be
   delisted, region-locked, or not an app at all`
 

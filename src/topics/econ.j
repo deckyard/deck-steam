@@ -142,7 +142,7 @@ export def struct AssetPrice {
  *        measured from; 0 counts everything
  * @return {TradeOffersSummary} the counts
  * @throws {Error} kind "steam" without a key, on a negative cutoff, or on
- *                 a transport failure
+ *                 a broken reply
  */
 export func tradeOffersSummary(c as Client, timeCutoff as int) {
     requireKey($c, "reading trade offers");
@@ -174,7 +174,7 @@ export func tradeOffersSummary(c as Client, timeCutoff as int) {
  * @param activeOnly {bool} skip offers that are already settled
  * @return {TradeOffers} the offers, in the two directions
  * @throws {Error} kind "steam" without a key, when both directions are
- *                 off, or on a transport failure
+ *                 off, or on a broken reply
  * @example
  *   def t as steam.TradeOffers init steam.tradeOffers($c, false, true, true);
  *   for (def o in $t.received) {
@@ -206,8 +206,7 @@ export func tradeOffers(c as Client, getSent as bool, getReceived as bool, activ
  * @param tradeOfferId {string} the offer id
  * @return {TradeOffer} the offer
  * @throws {Error} kind "steam" without a key, on a non-numeric id, when
- *                 the offer is not the key's to read, or on a transport
- *                 failure
+ *                 the offer is not the key's to read, or on a broken reply
  */
 export func tradeOffer(c as Client, tradeOfferId as string) {
     requireKey($c, "reading a trade offer");
@@ -231,7 +230,7 @@ export func tradeOffer(c as Client, tradeOfferId as string) {
  * @param appId {int} the game
  * @return {list of AssetPrice} one entry per item class on sale
  * @throws {Error} kind "steam" without a key, on a bad app id, when the
- *                 game has no item store, or on a transport failure
+ *                 game has no item store, or on a broken reply
  */
 export func assetPrices(c as Client, appId as int) {
     requireKey($c, "reading asset prices");

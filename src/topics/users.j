@@ -165,7 +165,7 @@ export def struct PlayerBan {
  * @param steamIds {list of string} up to 100 Steam ids, any notation
  * @return {list of PlayerSummary} one entry per account Steam knew
  * @throws {Error} kind "steam" without a key, on an empty or oversized
- *                 batch, on an unparseable id, or on a transport failure
+ *                 batch, on an unparseable id, or on a broken reply
  * @example
  *   def ps as list of steam.PlayerSummary init
  *       steam.playerSummaries($c, ["76561197960287930", "STEAM_1:1:11101"]);
@@ -209,7 +209,7 @@ export func playerSummary(c as Client, steamId as string) {
  * @param steamId {string} a Steam id in any notation
  * @return {list of Friend} the friends, oldest friendship first
  * @throws {Error} kind "steam" without a key, on an unparseable id, or on
- *                 a transport failure
+ *                 a broken reply
  */
 export func friendList(c as Client, steamId as string) {
     requireKey($c, "reading a friend list");
@@ -232,7 +232,7 @@ export func friendList(c as Client, steamId as string) {
  * @param steamIds {list of string} up to 100 Steam ids, any notation
  * @return {list of PlayerBan} one record per account
  * @throws {Error} kind "steam" without a key, on a bad batch, or on a
- *                 transport failure
+ *                 broken reply
  */
 export func playerBans(c as Client, steamIds as list of string) {
     requireKey($c, "reading ban records");
@@ -270,7 +270,7 @@ export func playerBan(c as Client, steamId as string) {
  * @param vanity {string} the custom URL segment
  * @return {string} the 64-bit id, or "" when no profile has that name
  * @throws {Error} kind "steam" without a key, on a blank name, or on a
- *                 transport failure
+ *                 broken reply
  * @example
  *   def id as string init steam.resolveVanityUrl($c, "gabelogannewell");
  */
@@ -294,7 +294,7 @@ export func resolveVanityUrl(c as Client, vanity as string) {
  *        `/id/<name>` profile URL
  * @return {string} the 64-bit id
  * @throws {Error} kind "steam" on blank text, when no account matches, on a
- *                 vanity name without a key, or on a transport failure
+ *                 vanity name without a key, or on a broken reply
  * @example
  *   def id as string init steam.resolveAccount($c, "gabelogannewell");
  */
@@ -317,7 +317,7 @@ export func resolveAccount(c as Client, text as string) {
  * @param steamId {string} a Steam id in any notation
  * @return {list of string} the 64-bit group ids, empty when the profile is private
  * @throws {Error} kind "steam" without a key, on an unparseable id, or on
- *                 a transport failure
+ *                 a broken reply
  */
 export func userGroups(c as Client, steamId as string) {
     requireKey($c, "reading group membership");
