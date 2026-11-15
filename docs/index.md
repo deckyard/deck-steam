@@ -22,6 +22,7 @@ This deck is part of [Deckyard](https://github.com/deckyard), community decks fo
 | [workshop.md](workshop.md) | Workshop items and collections |
 | [econ.md](econ.md) | trade offers and item store prices |
 | [servers.md](servers.md) | game server accounts and login tokens |
+| [design.md](design.md) | why the deck is built as it is: decisions, errors, limits, testing |
 
 Start with [core.md](core.md), then [steamid.md](steamid.md): almost every
 call takes an id. [news.md](news.md), [store.md](store.md) and
