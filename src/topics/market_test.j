@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.26.0
+# pragma-jennifer-version: >=0.27.0
 
 # steam - white-box tests for the market topic.
 # Spliced into steam_test.j via include - run with:
@@ -132,19 +132,19 @@ func overviewWithoutName() {
 # --- one must read as 0 rather than raise an uncaught conversion error
 
 func testParseMoneySurvivesAbsurdDigitRuns() {
-    testing.assertEqual(parseMoney(strings.repeat("9", 400)), 0.0);
-    testing.assertEqual(parseMoney(strings.repeat("9", 400) + ",00"), 0.0);
+    testing.assertEqual(parseMoney(strings.replicate("9", 400)), 0.0);
+    testing.assertEqual(parseMoney(strings.replicate("9", 400) + ",00"), 0.0);
 }
 
 func testParseCountSurvivesAbsurdDigitRuns() {
-    testing.assertEqual(parseCount(strings.repeat("9", 30)), 0);
-    testing.assertEqual(parseCount(strings.repeat("9", 400)), 0);
+    testing.assertEqual(parseCount(strings.replicate("9", 30)), 0);
+    testing.assertEqual(parseCount(strings.replicate("9", 400)), 0);
 }
 
 func testParseMoneyCentsClampsInsteadOfOverflowing() {
     # 1e30 is a valid float but scaling it to cents does not fit an int64
-    testing.assertEqual(parseMoneyCents(strings.repeat("9", 30)), 0);
-    testing.assertEqual(parseMoneyCents(strings.repeat("9", 400)), 0);
+    testing.assertEqual(parseMoneyCents(strings.replicate("9", 30)), 0);
+    testing.assertEqual(parseMoneyCents(strings.replicate("9", 400)), 0);
     testing.assertEqual(parseMoneyCents("$1.23"), 123);
 }
 

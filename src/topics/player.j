@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.26.0
+# pragma-jennifer-version: >=0.27.0
 
 # steam - the IPlayerService interface: library, playtime, level, badges.
 # Spliced into steam.j via include - not a standalone module.
@@ -295,7 +295,7 @@ export func mostPlayed(games as list of OwnedGame, count as int) {
     if (len($ranked) <= $count) {
         return $ranked;
     }
-    return lists.head($ranked, $count);
+    return $ranked[..$count];
 }
 
 /**

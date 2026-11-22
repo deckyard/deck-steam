@@ -1,7 +1,7 @@
 #!/usr/bin/env -S jennifer run
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.26.0
+# pragma-jennifer-version: >=0.27.0
 
 # servers example - game server accounts and their login tokens.
 #
@@ -10,7 +10,6 @@
 #   STEAM_API_KEY=... jennifer run examples/servers.j
 
 use io;
-use strings;
 
 import "../src/steam.j" as steam;
 
@@ -34,7 +33,7 @@ for (def s in $accounts) {
     }
     io.printf("%s  app %d|pad=6|align=left %s\n", $s.steamId, $s.appId, $usable);
     io.printf("  memo   %s\n", $s.memo);
-    io.printf("  token  %s...\n", strings.substring($s.loginToken, 0, 4));
+    io.printf("  token  %s...\n", $s.loginToken[..4]);
 
     def status as steam.LoginTokenStatus init steam.queryLoginToken($c, $s.loginToken);
     io.printf("  banned %t, expires %d\n", $status.banned, $status.expires);

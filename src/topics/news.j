@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.26.0
+# pragma-jennifer-version: >=0.27.0
 
 # steam - the ISteamNews interface, plus markup-to-text for its bodies.
 # Spliced into steam.j via include - not a standalone module.
@@ -254,10 +254,10 @@ export func summarize(text as string, maxChars as int) {
     if (len($clean) <= $maxChars) {
         return $clean;
     }
-    def cut as string init strings.substring($clean, 0, $maxChars - 1);
+    def cut as string init $clean[..$maxChars - 1];
     def space as int init lastSpace($cut);
     if ($space > 0) {
-        $cut = strings.substring($cut, 0, $space);
+        $cut = $cut[..$space];
     }
     return strings.trimRight($cut) + "…";
 }
@@ -356,7 +356,7 @@ func closingBracket(runes as list of string, open as int, closer as string) {
  * @internal
  */
 func sliceRunes(runes as list of string, start as int, stop as int) {
-    return strings.join(lists.slice($runes, $start, $stop), "");
+    return strings.join($runes[$start..$stop], "");
 }
 
 /**
@@ -369,12 +369,12 @@ func sliceRunes(runes as list of string, start as int, stop as int) {
 func tagName(inner as string) {
     def text as string init strings.lower(strings.trim($inner));
     if (strings.startsWith($text, "/")) {
-        $text = strings.substring($text, 1);
+        $text = $text[1..];
     }
     for (def cut in [" ", "=", "/"]) {
         def at as int init strings.indexOf($text, $cut);
         if ($at >= 0) {
-            $text = strings.substring($text, 0, $at);
+            $text = $text[..$at];
         }
     }
     return strings.trim($text);
@@ -410,12 +410,12 @@ func tagSpacing(inner as string) {
 func isHtmlTag(inner as string) {
     def text as string init strings.trim($inner);
     if (strings.startsWith($text, "/")) {
-        $text = strings.substring($text, 1);
+        $text = $text[1..];
     }
     if ($text == "") {
         return false;
     }
-    def head as string init strings.lower(strings.substring($text, 0, 1));
+    def head as string init strings.lower($text[..1]);
     if ($head < "a" or $head > "z") {
         return false;
     }

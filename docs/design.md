@@ -127,4 +127,5 @@ shows up only when someone runs the examples. `featured`, `serverInfo` and
   `HttpError` status.
 - `net.NetError` and the `"net"` kind (`jennifer`'s M28.65, transport
   errors have their own kind).
-- Floor `>=0.26.0`.
+- Floor `>=0.27.0`: the tests use the UTF-8 codec of `encoding.encode` and
+  `strings.replicate`, new in 0.27.0.

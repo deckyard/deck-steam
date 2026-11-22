@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.26.0
+# pragma-jennifer-version: >=0.27.0
 
 # steam - the ISteamUserStats interface: achievements, stats, player counts.
 # Spliced into steam.j via include - not a standalone module.
@@ -311,7 +311,7 @@ export func rarest(rarities as list of AchievementRarity, count as int) {
     if (len($ranked) <= $count) {
         return $ranked;
     }
-    return lists.head($ranked, $count);
+    return $ranked[..$count];
 }
 
 /**

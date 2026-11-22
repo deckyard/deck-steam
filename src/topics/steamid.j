@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.26.0
+# pragma-jennifer-version: >=0.27.0
 
 # steam - Steam id parsing, conversion, and profile URLs.
 # Spliced into steam.j via include - not a standalone module.
@@ -240,7 +240,7 @@ export func fromSteamId2(text as string) {
     if (not strings.startsWith(strings.upper($raw), "STEAM_")) {
         raiseError("\"" + $raw + "\" is not a STEAM_X:Y:Z id");
     }
-    def fields as list of string init strings.split(strings.substring($raw, 6), ":");
+    def fields as list of string init strings.split($raw[6..], ":");
     if (len($fields) != 3) {
         raiseError("\"" + $raw + "\" is not a STEAM_X:Y:Z id");
     }
@@ -276,7 +276,7 @@ export func fromSteamId3(text as string) {
     def raw as string init strings.trim($text);
     def body as string init $raw;
     if (strings.startsWith($body, "[") and strings.endsWith($body, "]")) {
-        $body = strings.substring($body, 1, len($body) - 1);
+        $body = $body[1..len($body) - 1];
     }
     def fields as list of string init strings.split($body, ":");
     if (len($fields) < 3 or len($fields) > 4) {

@@ -19,7 +19,7 @@ with; whoever holds it can impersonate the server. Verbose mode redacts
 `login_token`; redact it in your own logs too:
 
 ```jennifer
-io.printf("token %s...\n", strings.substring($s.loginToken, 0, 4));
+io.printf("token %s...\n", $s.loginToken[..4]);
 ```
 
 ## A server that stops appearing

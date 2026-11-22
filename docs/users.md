@@ -21,7 +21,7 @@ for (def f in steam.friendList($c, $id)) {
     $ids[] = $f.steamId;
 }
 if (len($ids) > steam.SUMMARY_BATCH) {
-    $ids = lists.head($ids, steam.SUMMARY_BATCH);
+    $ids = $ids[..steam.SUMMARY_BATCH];
 }
 for (def friend in steam.playerSummaries($c, $ids)) {
     io.printf("%s\n", $friend.personaName);

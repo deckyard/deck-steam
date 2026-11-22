@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.26.0
+# pragma-jennifer-version: >=0.27.0
 
 # steam - white-box tests for the core topic.
 # Spliced into steam_test.j via include - run with:
@@ -454,7 +454,7 @@ func serveCanned(l as net.Listener, answer as string) {
             if ($answer == "") {
                 $open[] = $conn;
             } else {
-                net.writeBytes($conn, convert.bytesFromString("utf-8", $answer));
+                net.writeBytes($conn, encoding.encode("utf-8", $answer));
                 net.close($conn);
             }
         }
@@ -498,7 +498,7 @@ func testClosedPassesOn() {
 func testDecodeBodyPassesTheCapOn() {
     try {
         decodeBody(
-            strings.repeat("[", 1001) + strings.repeat("]", 1001),
+            strings.replicate("[", 1001) + strings.replicate("]", 1001),
             "https://example.invalid");
         throw Error{kind: "missed", message: "a deep reply passed"};
     } catch (e) {

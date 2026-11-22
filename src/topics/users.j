@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.26.0
+# pragma-jennifer-version: >=0.27.0
 
 # steam - the ISteamUser interface: profiles, friends, bans, vanity names.
 # Spliced into steam.j via include - not a standalone module.
@@ -481,16 +481,16 @@ func vanitySegment(text as string) {
     def raw as string init strings.trim($text);
     def marker as int init strings.indexOf($raw, "/id/");
     if ($marker >= 0) {
-        $raw = strings.substring($raw, $marker + 4);
+        $raw = $raw[$marker + 4..];
     }
     for (def cut in ["?", "#"]) {
         def at as int init strings.indexOf($raw, $cut);
         if ($at >= 0) {
-            $raw = strings.substring($raw, 0, $at);
+            $raw = $raw[..$at];
         }
     }
     while (strings.endsWith($raw, "/")) {
-        $raw = strings.substring($raw, 0, len($raw) - 1);
+        $raw = $raw[..len($raw) - 1];
     }
     return ensureText($raw, "vanity name");
 }
