@@ -2,7 +2,7 @@
 
 ## Scope
 
-The deck is a typed client for Valve's Steam services:
+The deck is a typed client for Valve™'s Steam™ services:
 
 - the **Steam Web API** (`api.steampowered.com`): users, friends, bans,
   vanity names and groups; owned and recent games, levels and badges;

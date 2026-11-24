@@ -11,7 +11,7 @@ for (def n in steam.newsForApp($c, 440, 5, 0)) {
 `count` is how many items to fetch, newest first; `maxLength` truncates
 each body to that many characters, 0 for whole bodies.
 
-A game's feed mixes the developer's announcements with Steam editorial and
+A game's feed mixes the developer's announcements with Steam™ editorial and
 third-party outlets. Name the feeds to keep only some:
 
 ```jennifer

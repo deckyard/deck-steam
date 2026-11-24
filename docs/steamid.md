@@ -2,7 +2,7 @@
 
 One account, three spellings: a server log prints `STEAM_1:0:11101`, the
 `status` command prints `[U:1:22202]`, the Web API uses
-`76561197960287930`. Every call in this deck that takes a Steam id accepts
+`76561197960287930`. Every call in this deck that takes a Steam™ id accepts
 all three. The conversions below are for producing one particular spelling.
 
 ## The 64-bit id

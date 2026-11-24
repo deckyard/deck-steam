@@ -22,7 +22,7 @@ included.
 
 ## Playtime
 
-Steam counts minutes:
+Steam™ counts minutes:
 
 ```jennifer
 for (def g in steam.mostPlayed($lib, 10)) {

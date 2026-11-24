@@ -19,7 +19,7 @@ lists the other conditions. Arguments are checked before any request.
 
 ## Which calls need a key
 
-Get a key at <https://steamcommunity.com/dev/apikey>. Valve rate-limits per
+Get a key at <https://steamcommunity.com/dev/apikey>. Valve™ rate-limits per
 key. A key-gated call on a keyless client throws before any request.
 
 | Keyless | Needs a key |
@@ -91,7 +91,7 @@ Every error of kind `"steam"`.
 |---|---|
 | `kind as string` | always `"steam"` |
 | `message as string` | what went wrong; a refusal names the URL and `HTTP <status>` |
-| `status as int` | the HTTP status Steam answered (401, 403, 429, ...); 0 when the failure is not a refused request |
+| `status as int` | the HTTP status Steam™ answered (401, 403, 429, ...); 0 when the failure is not a refused request |
 
 ### `Client`
 
@@ -238,7 +238,7 @@ publishes the field, so "" or 0 means "not shared".
 | ----- | ------- |
 | `steamId as string` | id64 |
 | `communityBanned as bool` | banned from community features |
-| `vacBanned as bool` | at least one VAC ban |
+| `vacBanned as bool` | at least one VAC™ ban |
 | `vacBans as int` | VAC bans across all games |
 | `gameBans as int` | developer-issued game bans |
 | `daysSinceLastBan as int` | 0 when never banned |
@@ -272,9 +272,9 @@ back empty, not as an error.
 | `name as string` | title, "" without app info |
 | `playtimeForever as int` | lifetime minutes |
 | `playtimeTwoWeeks as int` | minutes in the last two weeks |
-| `playtimeWindows as int` | lifetime minutes on Windows |
-| `playtimeMac as int` | lifetime minutes on macOS |
-| `playtimeLinux as int` | lifetime minutes on Linux |
+| `playtimeWindows as int` | lifetime minutes on Windows™ |
+| `playtimeMac as int` | lifetime minutes on macOS™ |
+| `playtimeLinux as int` | lifetime minutes on Linux™ |
 | `playtimeDeck as int` | lifetime minutes on a Steam Deck |
 | `iconHash as string` | icon hash for `gameIconUrl`, "" without app info |
 | `hasCommunityVisibleStats as bool` | the game publishes stats |
@@ -439,7 +439,7 @@ back empty, not as an error.
 | `gameDir as string` | game directory, e.g. "tf" |
 | `region as int` | Steam region code |
 | `gamePort as int` | client port |
-| `specPort as int` | SourceTV port, 0 when none |
+| `specPort as int` | SourceTV™ port, 0 when none |
 | `secure as bool` | VAC enabled |
 | `lan as bool` | LAN-only |
 
@@ -540,7 +540,7 @@ Amounts are ints in minor units. A free or unreleased title has a zeroed
 | ----- | ------- |
 | `windows as bool` | Windows build |
 | `mac as bool` | macOS build |
-| `linux as bool` | native Linux build (Proton not counted) |
+| `linux as bool` | native Linux build (Proton™ not counted) |
 
 ### `AppDetails`
 

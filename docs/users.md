@@ -28,7 +28,7 @@ for (def friend in steam.playerSummaries($c, $ids)) {
 }
 ```
 
-Accounts Steam does not know are left out, so the result may be shorter
+Accounts Steam™ does not know are left out, so the result may be shorter
 than the input. `playerSummary` throws instead.
 
 ### Private fields

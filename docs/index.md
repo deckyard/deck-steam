@@ -1,6 +1,6 @@
 # steam
 
-`@deckyard/steam` is a typed client for Valve's Steam Web API, the
+`@deckyard/steam` is a typed client for Valve™'s Steam™ Web API, the
 storefront and the Community Market. One guide per topic; every export,
 value and field is in the [cheatsheet](cheatsheet.md). Each topic has a
 runnable program in
@@ -27,3 +27,11 @@ This deck is part of [Deckyard](https://github.com/deckyard), community decks fo
 Start with [core.md](core.md), then [steamid.md](steamid.md): almost every
 call takes an id. [news.md](news.md), [store.md](store.md) and
 [market.md](market.md) need no key.
+
+## Trademarks
+
+Steam™, Valve™ and the Steam logo are trademarks of Valve Corporation. Other
+product and company names may be trademarks of their respective owners. They
+are used only to identify the products this deck works with. This deck is an
+independent project, not affiliated with, sponsored, endorsed or supported
+by Valve Corporation.

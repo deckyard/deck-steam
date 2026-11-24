@@ -9,7 +9,7 @@ the per-game rarity and player count need neither.
 io.printf("%d in game\n", steam.currentPlayers($c, 730));
 ```
 
-Throws when Steam has no count for the app, rather than returning 0.
+Throws when Steam™ has no count for the app, rather than returning 0.
 
 ## Achievement rarity (keyless)
 

@@ -1,6 +1,6 @@
 # steam examples
 
-One program per topic. All are read-only: none changes anything on Steam.
+One program per topic. All are read-only: none changes anything on Steam™.
 
 ```
 jennifer run examples/<topic>.j

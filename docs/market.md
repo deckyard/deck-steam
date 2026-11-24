@@ -1,7 +1,7 @@
 # Market - Community Market prices
 
 `steamcommunity.com/market/priceoverview/` quotes an item's current price.
-No key, and the hardest rate limit Steam has.
+No key, and the hardest rate limit Steam™ has.
 
 ```jennifer
 def c as steam.Client init steam.withCurrency(steam.client(""), steam.CURRENCY_EUR);

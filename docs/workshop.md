@@ -16,7 +16,7 @@ The id is the number in the item's URL,
 builds that URL.
 
 `publishedFileDetails` takes up to `WORKSHOP_BATCH` (100) numeric ids per
-request. Items Steam does not know are left out, so the result may be
+request. Items Steam™ does not know are left out, so the result may be
 shorter than the input; `publishedFile` throws instead.
 
 ## Collections
@@ -38,11 +38,11 @@ each with a `found` flag and its `CollectionItem`s in collection order.
 ## Fields
 
 - `creatorAppId` is the app the item was made in, `consumerAppId` the app
-  it is played in. A game with a separate SDK app (Source games, Dota) sets
+  it is played in. A game with a separate SDK app (Source games, Dota™) sets
   them apart.
 - `visibility` is a `WORKSHOP_*` value; `workshopVisibilityName` names it.
   Unlisted means reachable by link but not in the browse list.
-- `fileUrl` is empty for most items: Valve delivers Workshop content
+- `fileUrl` is empty for most items: Valve™ delivers Workshop content
   through the client, not over HTTP.
 - `description` is BBCode; see [`plainText`](news.md#markup).
 - `banned` / `banReason`: check them before recommending an item.

@@ -25,7 +25,7 @@ io.printf("token %s...\n", $s.loginToken[..4]);
 ## A server that stops appearing
 
 `isUsableServerAccount` is false when the account is deleted or its token
-has expired; Steam expires a token unused for a long time without notice.
+has expired; Steam™ expires a token unused for a long time without notice.
 `queryLoginToken` checks one token directly:
 
 ```jennifer
@@ -33,7 +33,7 @@ def status as steam.LoginTokenStatus init steam.queryLoginToken($c, $token);
 io.printf("banned %t, expires %d\n", $status.banned, $status.expires);
 ```
 
-Valve bans server accounts for abusive listing; the ban follows the account,
+Valve™ bans server accounts for abusive listing; the ban follows the account,
 not the address.
 
 `gameServerInfo(c, steamId)` reads the public record (id and app) of any

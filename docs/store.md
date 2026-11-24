@@ -1,7 +1,7 @@
 # Store - the storefront
 
 `store.steampowered.com/api/...` is the storefront's own JSON, not part of
-the Web API: undocumented by Valve, keyless and regional. It is the only
+the Web API: undocumented by Valve™, keyless and regional. It is the only
 source of prices, descriptions and release dates.
 
 ```jennifer
@@ -62,7 +62,7 @@ steam.discountLabel($d.price);     # "-66%"
 steam.majorUnits($d.price.final);  # 3.39
 ```
 
-`finalFormatted` is Steam's rendering for the country, symbol included; show
+`finalFormatted` is Steam™'s rendering for the country, symbol included; show
 that. `initialFormatted` is empty at full price. `majorUnits` divides by 100
 for every currency, yen included, because Steam reports yen in hundredths
 too.

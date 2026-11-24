@@ -5,7 +5,7 @@
 
 ## The catalogue
 
-Valve retired the keyless `ISteamApps/GetAppList/v2`; it answers 404,
+Valve™ retired the keyless `ISteamApps/GetAppList/v2`; it answers 404,
 though much code online still calls it. The replacement,
 `IStoreService/GetAppList/v1`, needs a key and is paginated. This deck asks
 it for games only: no DLC, software, videos or hardware.
@@ -15,7 +15,7 @@ def catalogue as list of steam.App init steam.appList($c, 20);   # at most 20 pa
 io.printf("%d apps\n", len($catalogue));
 ```
 
-`appList` reads pages of `APPLIST_PAGE_MAX` (50000), the largest Steam
+`appList` reads pages of `APPLIST_PAGE_MAX` (50000), the largest Steam™
 serves, until none are left or the page budget is spent. The catalogue runs
 to several pages, so keep the result and search it in memory:
 

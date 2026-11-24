@@ -14,7 +14,7 @@ steam.withCountry($c, "DE");             # discarded, changes nothing
 ## Keys
 
 Take a key from <https://steamcommunity.com/dev/apikey>. It is tied to your
-account, Valve rate-limits per key, and the
+account, Valve™ rate-limits per key, and the
 [API Terms of Use](https://steamcommunity.com/dev/apiterms) apply to what you
 do with it, including a rule against redistributing the data you pull.
 
@@ -46,7 +46,7 @@ without a key; the calls that need one throw before sending anything. The
 | `retries` / `backoffMs` | `withRetries` / `withBackoff` | retries of a 429 or 5xx: 2, from 500 ms |
 
 The backoff doubles per attempt, is raised to a numeric `Retry-After` when
-Steam sends a longer one, and is capped at 30 s. The Community Market needs
+Steam™ sends a longer one, and is capped at 30 s. The Community Market needs
 more than the defaults:
 
 ```jennifer

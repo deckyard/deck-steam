@@ -4,7 +4,7 @@
 [![Documentation](https://img.shields.io/badge/docs-github%20pages-blue)](https://deckyard.github.io/deck-steam/)
 [![release](https://img.shields.io/github/v/release/deckyard/deck-steam)](https://github.com/deckyard/deck-steam/releases/latest)
 
-A typed client for Valve's Steam Web API (`ISteamUser`, `IPlayerService`,
+A typed client for Valve™'s Steam™ Web API (`ISteamUser`, `IPlayerService`,
 `ISteamUserStats`, `ISteamApps`, `ISteamNews`, `ISteamRemoteStorage`,
 `IEconService`, `IGameServersService`), the storefront on
 `store.steampowered.com` and the Community Market on `steamcommunity.com`,
@@ -67,8 +67,6 @@ runnable program per topic.
 
 ## Disclaimer
 
-Steam, Valve and the Steam logo are trademarks of Valve Corporation. This is
-an independent library, not affiliated with, endorsed or supported by Valve.
 Valve changes the Web API without notice and has retired endpoints before
 (see [apps](docs/apps.md#the-catalogue)). Respect the
 [Steam Web API Terms of Use](https://steamcommunity.com/dev/apiterms) and the
@@ -78,3 +76,11 @@ your own risk; no warranty of any kind.
 ## License
 
 LGPL-3.0-only, see [LICENSE](LICENSE). Copyright (C) 2026 mplx &lt;mplx@jennifer-lang.dev&gt;.
+
+## Trademarks
+
+Steam™, Valve™ and the Steam logo are trademarks of Valve Corporation. Other
+product and company names may be trademarks of their respective owners. They
+are used only to identify the products this deck works with. This deck is an
+independent project, not affiliated with, sponsored, endorsed or supported
+by Valve Corporation.
