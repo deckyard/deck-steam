@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.27.0
+# pragma-jennifer-version: >=0.28.0
 
 /**
  * steam - a typed client for Valve's Steam Web API (`api.steampowered.com`),
@@ -16,7 +16,7 @@
  * with `include`, so this file is the module boundary.
  *
  * @module steam
- * @version 0.2.0-dev
+ * @version 0.3.0
  * @license LGPL-3.0-only
  * @see https://steamcommunity.com/dev
  * @see https://partner.steamgames.com/doc/webapi_overview

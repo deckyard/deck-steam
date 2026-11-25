@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.27.0
+# pragma-jennifer-version: >=0.28.0
 
 # steam - client, request plumbing, shared validation and JSON readers.
 # Spliced into steam.j via include - not a standalone module.
@@ -1039,7 +1039,7 @@ func nodeFieldList(v as json.Value, ptr as string, field as string) {
  */
 func floatToIntOrZero(value as float) {
     try {
-        return convert.toInt($value);
+        return math.trunc($value);
     } catch (e) {
         return 0;
     }

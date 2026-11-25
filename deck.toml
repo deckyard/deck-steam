@@ -1,6 +1,6 @@
 [package]
 name = "@deckyard/steam"
-version = "0.2.0"
+version = "0.3.0"
 description = "A thick, friendly layer over Valve's Steam Web API"
 license = "LGPL-3.0-only"
 authors = ["mplx <mplx@jennifer-lang.dev>"]
@@ -15,4 +15,4 @@ homepage = "https://github.com/deckyard/deck-steam"
 manual = "https://deckyard.github.io/deck-steam/"
 
 [engines]
-jennifer = ">=0.27.0"
+jennifer = ">=0.28.0"

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LGPL-3.0-only
 # SPDX-FileCopyrightText: Copyright (C) 2026 mplx <mplx@jennifer-lang.dev>
-# pragma-jennifer-version: >=0.27.0
+# pragma-jennifer-version: >=0.28.0
 
 # White-box tests for the steam module: `jennifer test src/steam_test.j`.
 # One test file per topic file, spliced in with `include`.

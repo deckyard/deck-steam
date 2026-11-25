@@ -865,7 +865,7 @@ try {
 
 ## Requirements
 
-- Jennifer 0.27.0 or newer, the default `jennifer` binary: requests go
+- Jennifer 0.28.0 or newer, the default `jennifer` binary: requests go
   through [`rest`](https://jennifer-lang.dev/modules/rest.html) and
   [`http`](https://jennifer-lang.dev/modules/http.html) to `net`, which
   `jennifer-tiny` stubs out. The pure helpers work on both.

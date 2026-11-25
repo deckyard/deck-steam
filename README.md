@@ -24,7 +24,7 @@ jvc add @deckyard/steam
 
 `jvc` vendors `src/` to `vendor/deckyard/steam/`. To vendor by hand, unpack
 `src/` from the release archive `deckyard-steam-<version>.tar.gz` there.
-Needs Jennifer 0.27.0 or newer and the default `jennifer` binary
+Needs Jennifer 0.28.0 or newer and the default `jennifer` binary
 (`jennifer-tiny` has no `net`).
 
 ## Example
