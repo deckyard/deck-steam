@@ -1,6 +1,6 @@
 [package]
-name = "@deckyard/steam"
-version = "0.3.0"
+name = "@skiffyard/steam"
+version = "0.4.0"
 description = "A thick, friendly layer over Valve's Steam Web API"
 license = "LGPL-3.0-only"
 authors = ["mplx <mplx@jennifer-lang.dev>"]
@@ -10,9 +10,9 @@ capabilities = ["net"]
 keywords = ["steam", "valve", "games", "rest", "api"]
 
 [package.urls]
-deck = "https://raw.githubusercontent.com/deckyard/deck-steam/main/deck.toml"
-homepage = "https://github.com/deckyard/deck-steam"
-manual = "https://deckyard.github.io/deck-steam/"
+deck = "https://raw.githubusercontent.com/skiffyard/deck-steam/main/deck.toml"
+homepage = "https://github.com/skiffyard/deck-steam"
+manual = "https://skiffyard.github.io/deck-steam/"
 
 [engines]
 jennifer = ">=0.28.0"
