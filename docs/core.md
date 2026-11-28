@@ -4,7 +4,7 @@ Every call takes a `Client`. It is a plain value with no socket and no
 state, and every builder returns a copy, so keep the result:
 
 ```jennifer
-import "@deckyard/steam/" as steam;
+import "@skiffyard/steam/" as steam;
 
 def c as steam.Client init steam.client("YOUR-KEY");
 $c = steam.withCountry($c, "DE");        # kept

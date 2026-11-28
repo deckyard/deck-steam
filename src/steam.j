@@ -21,7 +21,7 @@
  * @see https://steamcommunity.com/dev
  * @see https://partner.steamgames.com/doc/webapi_overview
  * @example
- *   import "@deckyard/steam/" as steam;
+ *   import "@skiffyard/steam/" as steam;
  *
  *   def c as steam.Client init steam.client("YOUR-KEY");
  *   def p as steam.PlayerSummary init steam.playerSummary($c, "76561197960287930");

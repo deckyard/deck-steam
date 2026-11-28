@@ -70,4 +70,4 @@ io.printf("%s\n", steam.summarize(steam.plainText($item.contents), 160));
 Both are pure, so they work as well on a Workshop description, which is
 BBCode too.
 
-See [`examples/news.j`](https://github.com/deckyard/deck-steam/blob/main/examples/news.j).
+See [`examples/news.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/news.j).

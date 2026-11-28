@@ -72,4 +72,4 @@ need a slow loop and a cache.
 item can come back with `found` true, a `lowestPrice`, and no volume, which
 reads as 0.
 
-See [`examples/market.j`](https://github.com/deckyard/deck-steam/blob/main/examples/market.j).
+See [`examples/market.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/market.j).

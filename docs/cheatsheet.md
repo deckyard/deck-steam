@@ -4,7 +4,7 @@ Every export, by topic. The guides linked from [the introduction](index.md)
 explain the background; this page lists signatures, values and fields.
 
 ```jennifer
-import "@deckyard/steam/" as steam;
+import "@skiffyard/steam/" as steam;
 def c as steam.Client init steam.client("YOUR-KEY");   # "" for the keyless endpoints
 ```
 

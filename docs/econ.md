@@ -74,4 +74,4 @@ throws rather than returning an empty list.
 Accepting, declining and cancelling offers need Steam's mobile confirmation
 flow, not the Web API, so this deck does not offer them.
 
-See [`examples/econ.j`](https://github.com/deckyard/deck-steam/blob/main/examples/econ.j).
+See [`examples/econ.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/econ.j).

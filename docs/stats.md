@@ -66,4 +66,4 @@ for (def a in $s.achievements) {
 }
 ```
 
-See [`examples/stats.j`](https://github.com/deckyard/deck-steam/blob/main/examples/stats.j).
+See [`examples/stats.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/stats.j).

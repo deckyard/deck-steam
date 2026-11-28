@@ -1,8 +1,8 @@
-# @deckyard/steam
+# @skiffyard/steam
 
-[![test](https://github.com/deckyard/deck-steam/actions/workflows/test.yml/badge.svg)](https://github.com/deckyard/deck-steam/actions/workflows/test.yml)
-[![Documentation](https://img.shields.io/badge/docs-github%20pages-blue)](https://deckyard.github.io/deck-steam/)
-[![release](https://img.shields.io/github/v/release/deckyard/deck-steam)](https://github.com/deckyard/deck-steam/releases/latest)
+[![test](https://github.com/skiffyard/deck-steam/actions/workflows/test.yml/badge.svg)](https://github.com/skiffyard/deck-steam/actions/workflows/test.yml)
+[![Documentation](https://img.shields.io/badge/docs-github%20pages-blue)](https://skiffyard.github.io/deck-steam/)
+[![release](https://img.shields.io/github/v/release/skiffyard/deck-steam)](https://github.com/skiffyard/deck-steam/releases/latest)
 
 A typed client for Valve™'s Steam™ Web API (`ISteamUser`, `IPlayerService`,
 `ISteamUserStats`, `ISteamApps`, `ISteamNews`, `ISteamRemoteStorage`,
@@ -16,21 +16,23 @@ deadline (`"timeout"`), a connection closed mid-reply (`"closed"`), a
 cancelled task (`"cancelled"`) and a host that cannot be reached
 (`net.NetError`, kind `"net"`).
 
+This deck is part of [Skiffyard](https://github.com/skiffyard), small community decks for [Jennifer](https://jennifer-lang.dev/).
+
 ## Install
 
 ```sh
-jvc add @deckyard/steam
+jvc add @skiffyard/steam
 ```
 
-`jvc` vendors `src/` to `vendor/deckyard/steam/`. To vendor by hand, unpack
-`src/` from the release archive `deckyard-steam-<version>.tar.gz` there.
+`jvc` vendors `src/` to `vendor/skiffyard/steam/`. To vendor by hand, unpack
+`src/` from the release archive `skiffyard-steam-<version>.tar.gz` there.
 Needs Jennifer 0.28.0 or newer and the default `jennifer` binary
 (`jennifer-tiny` has no `net`).
 
 ## Example
 
 ```jennifer
-import "@deckyard/steam/" as steam;
+import "@skiffyard/steam/" as steam;
 
 def c as steam.Client init steam.clientFromEnv();      # reads STEAM_API_KEY
 
@@ -61,7 +63,7 @@ runnable program per topic.
 
 ## Documentation
 
-<https://deckyard.github.io/deck-steam/>: a guide per topic and the
+<https://skiffyard.github.io/deck-steam/>: a guide per topic and the
 [cheatsheet](docs/cheatsheet.md) of every export. Valve's own reference:
 [Steam Web API documentation](https://partner.steamgames.com/doc/webapi_overview).
 

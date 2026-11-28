@@ -70,4 +70,4 @@ and whether each is done.
 lent the copy being played, or `""` when the player owns it. A server plugin
 uses it to ban the owner rather than the borrower.
 
-See [`examples/player.j`](https://github.com/deckyard/deck-steam/blob/main/examples/player.j).
+See [`examples/player.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/player.j).

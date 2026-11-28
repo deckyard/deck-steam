@@ -39,4 +39,4 @@ not the address.
 `gameServerInfo(c, steamId)` reads the public record (id and app) of any
 server account, for checking someone else's registration.
 
-See [`examples/servers.j`](https://github.com/deckyard/deck-steam/blob/main/examples/servers.j).
+See [`examples/servers.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/servers.j).

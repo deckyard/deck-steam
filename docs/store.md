@@ -84,4 +84,4 @@ in it.
 `windows`, `mac`, `linux`. `largeCapsules` is often empty outside a sale,
 so fall back to a platform list.
 
-See [`examples/store.j`](https://github.com/deckyard/deck-steam/blob/main/examples/store.j).
+See [`examples/store.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/store.j).

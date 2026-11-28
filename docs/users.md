@@ -84,4 +84,4 @@ This endpoint capitalizes its JSON keys (`SteamId`, `VACBanned`,
 `NumberOfVACBans`), unlike every other Steam endpoint. That matters only
 when you read it through `call`.
 
-See [`examples/users.j`](https://github.com/deckyard/deck-steam/blob/main/examples/users.j).
+See [`examples/users.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/users.j).

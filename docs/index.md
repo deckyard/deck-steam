@@ -1,12 +1,12 @@
 # steam
 
-`@deckyard/steam` is a typed client for Valve™'s Steam™ Web API, the
+`@skiffyard/steam` is a typed client for Valve™'s Steam™ Web API, the
 storefront and the Community Market. One guide per topic; every export,
 value and field is in the [cheatsheet](cheatsheet.md). Each topic has a
 runnable program in
-[`examples/`](https://github.com/deckyard/deck-steam/tree/main/examples).
+[`examples/`](https://github.com/skiffyard/deck-steam/tree/main/examples).
 
-This deck is part of [Deckyard](https://github.com/deckyard), community decks for [Jennifer](https://jennifer-lang.dev/).
+This deck is part of [Skiffyard](https://github.com/skiffyard), small community decks for [Jennifer](https://jennifer-lang.dev/).
 
 | Guide | Covers |
 | ----- | ------ |

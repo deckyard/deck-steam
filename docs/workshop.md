@@ -47,4 +47,4 @@ each with a `found` flag and its `CollectionItem`s in collection order.
 - `description` is BBCode; see [`plainText`](news.md#markup).
 - `banned` / `banReason`: check them before recommending an item.
 
-See [`examples/workshop.j`](https://github.com/deckyard/deck-steam/blob/main/examples/workshop.j).
+See [`examples/workshop.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/workshop.j).

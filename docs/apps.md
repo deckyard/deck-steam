@@ -85,4 +85,4 @@ gone.
 `serverInfo($c)` reads Steam's clock, to check a local clock before
 comparing it with Steam's Unix times.
 
-See [`examples/apps.j`](https://github.com/deckyard/deck-steam/blob/main/examples/apps.j).
+See [`examples/apps.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/apps.j).

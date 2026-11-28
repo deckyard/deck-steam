@@ -72,5 +72,5 @@ steam.groupUrl("103582791429521412");
 ```
 
 None of this makes a request;
-[`examples/steamid.j`](https://github.com/deckyard/deck-steam/blob/main/examples/steamid.j)
+[`examples/steamid.j`](https://github.com/skiffyard/deck-steam/blob/main/examples/steamid.j)
 runs without a key or a connection.
